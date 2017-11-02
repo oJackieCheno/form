@@ -1,0 +1,135 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <title>The Starbuzz Bean Machine</title>
+    <link rel="stylesheet" type="text/css" href="../starbuzz/starbuzz.css">
+    <link rel="stylesheet" type="text/css" href="tablestyledform.css">
+</head>
+
+<body>
+    <div id="form">
+        <h1>The Starbuzz Bean Machine</h1>
+        <h2>Fill out the form below and click submit to order</h2>
+        <form action="http://www.starbuzzcoffee.com/processorder.php" method="POST">
+            <!--post:把表单变量打包后隐藏在后台发送给服务器，把所有的表单数据作为请求的一部分发送，对用户不可见，用户只能在浏览器地址栏看到Web应用程序的URL。
+          GET方式：表单变量也打包，不过在它向浏览器发送请求之前，附加在URL末端部分，所以发送的请求中不包含任何表单数据，直接添加到URL自身，用户能够看到在地址栏这些数据。-->
+            <!--当发送大量信息，如textarea的时候，需要用POST方式，发送私密信息的时候，也需要POST。当不希望用户标记网页，用POST，比如处理订单的应用程序，不希望用户标记网页，
+          否则每次用户返回所标记的页面，订单都会被再次提交。
+          当应用程序希望用户标记这个网页的时候，也就是提交表单后的结果，使用GET，这样用户不用再填满表单就能看到结果-->
+            <table>
+                <tr>
+                    <th>Choose your beans: &nbsp;</th>
+                    <!--$nbsp-插入空格-->
+                    <td>
+                        <select name="beans"><!--option元素不需要name，因为所有的option元素都是select的一部分，我们只需要给select命名-->
+                      <option value="House Blend">House Blend</option>
+                      <option value="Bolivia">Shade Grown Bolivia Supremo<!--option元素的内容作为下拉菜单的标签--></option>
+                      <option value="Guatemala" selected = "selected">Organic Guatemala</option>
+                      <!--当浏览器将表单元素的名称和值打成数据包时，它使用select元素的名字以及选中的选项自身的值-value
+                      在这个例子中，浏览器发送至服务器的数据是：beans=“Guatemala”-->
+                      <option value="Kenya">Kenya</option>
+                    </select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>Type:</th>
+                    <td>
+                        <fieldset>
+                            <!--fieldset和legend一起可以组合表单元素，呈现不同的样式-->
+                            <legend>Type</legend><input type="radio" name="beantype" value="Whole bean" /> Whole bean <br />
+                            <!--总是在元素右手边标记单选框按钮-->
+                            <!--同一组所有单选框按钮共享一个相同的name，提交表单时，只是把选中的选项的value值连同名字发给服务器-->
+                            <input type="radio" name="beantype" value="Ground" checked="checked" id="ground" />
+                            <label for="ground">Ground</label> <br />
+                            <!--label元素提供一长串网页结构信息，帮助视力受损者用屏幕读取器修正信息-->
+                        </fieldset>
+                        <!--checked属性用于在浏览器显示表单时，该选项默认选中-->
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>Extras: </th>
+                    <td>
+                        <input type="checkbox" name="extras[]" value="Gift wrap" />Gift wrap<br />
+                        <input type="checkbox" name="extras[]" value="Include catalog" checked="checked" />Include catalog with order<br />
+                        <!--总的来说，input里面的属性，type是确定input类型，name是为了可以与Web服务器应用程序里的名字相匹配，所以一定要正确输入，
+                    value则是服务器应用程序处理完标单后，给用户返回的网页上的值。-->
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>
+                        Ship to:</th>
+                    <td>
+                        <table>
+                            <tr>
+                                <th>Name:</th>
+                                <td>
+                                    <input type="text" placeholder="Danny" name="name" />
+                                    <!--input外的"Name"是我们对文本框附加的标签，以便使用户知道在文本框应该填入些什么,写什么都不影响数据传输-->
+                                    <!--input内的name 属性是用户输入数据的标识符,每个name设置为不同值。这里的name值必须设置
+                                成Web应用程序所接受的表单名字，要求正确的书写格式（大小写，拼写），所以，编写表单的时候，我们需要向主机代理商要求提供文档说明。
+                                name在表单和处理表单的Web应用程序之间建立连接。当提交一个表单时，
+                                浏览器会使用唯一的名字来打包所有的数据。将你的每个数据和标签赋
+                                予唯一的名字属性值，紧接着浏览器将这些名字及它们的值发送给服务器。
+                                服务器的应用程序需要带有标签的表单数据，这样才能将数据区分开。
+                                比如：用户输入地址toronto，浏览器打包的数据就是：address：toronto-->
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Address: </th>
+                                <td><input type="text" name="address" /></td>
+                            </tr>
+                            <tr>
+                                <th>City: </th>
+                                <td>
+                                    <input type="text" name="city" />
+                                    <!--input是内联元素，所以需要<br />换行符-->
+                                </td>
+                            </tr>
+                            <tr>
+                                <th> State:</th>
+                                <td><input type="text" name="state" /></td>
+                            </tr>
+                            <tr>
+                                <th> Zip:</th>
+                                <td> <input type="text" name="zip" /></td>
+                            </tr>
+                            <tr>
+                                <th> Phone:</th>
+                                <td><input type="text" name="phone" /> </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Upload your image</th>
+                    <td><input type="file" name="img" /></td>
+                    <!--input type="file"用于从本地上传文件，当表单被提交时，文件内容连同表单一起传给服务器，必须使用POST方式-->
+                </tr>
+                <tr>
+                    <th>Customer comments: </th>
+                    <td><textarea name="comments" rows="10" cols="48" placeholder="input your comments"></textarea></td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="text-align:center">
+                        <input type="submit" value="Order Now" />
+                        <!--submit button默认文本是submit，如果添加value属性，给他设置一个值，可以在提交按钮上显示其他值-->
+                    </td>
+                </tr>
+            </table>
+        </form><br>
+
+        <button type="button" value="Order Banner">Order Banner</button>
+    </div>
+
+
+
+
+</body>
+
+</html>

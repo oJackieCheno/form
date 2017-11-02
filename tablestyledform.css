@@ -1,0 +1,38 @@
+body {
+    background: #efe5d0 url(../starbuzz/images/background.gif) top left;
+    font-family: Verdana, Helvetica, Arial, sans-serif;
+}
+
+table {
+    border: thin dotted #7e7e7e;
+    padding: 10px;
+}
+
+th {
+    text-align: right;
+    vertical-align: top;
+    padding-right: 10px;
+    padding-top: 2px;
+}
+
+td {
+    vertical-align: top;
+    padding-bottom: 15px;
+}
+
+table table {
+    border: none;
+    padding: 0px;
+}
+
+table table th,
+table table td {
+    padding-bottom: 0px;
+}
+
+#form,
+button {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+}
